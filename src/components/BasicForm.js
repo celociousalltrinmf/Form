@@ -10,13 +10,14 @@ const BasicForm = () => {
     confirmPassword: "",
   };
 
-  const onSubmit = (values, actions) => {
+  const onSubmit =  async (values, actions) => {
     console.log("VALUES", values);
     console.log("ACTIONS", actions);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     actions.resetForm()
   };
 
-  const { values, handleChange, handleBlur, errors, touched, handleSubmit } =
+  const { values, handleChange, handleBlur, errors, touched, handleSubmit, isSubmitting } =
     useFormik({
       initialValues: init,
       validationSchema: basicSchema,
@@ -84,7 +85,7 @@ const BasicForm = () => {
           <p className="error">{errors.confirmPassword}</p>
         )}
 
-        <button type="submit">submit</button>
+        <button disabled = {isSubmitting} type="submit">submit</button>
       </form>
     </div>
   );
