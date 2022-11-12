@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import { basicSchema } from "./schemas";
+import { basicSchema } from "../schemas";
 
 const BasicForm = () => {
   const init = {
@@ -10,19 +10,26 @@ const BasicForm = () => {
     confirmPassword: "",
   };
 
-  const onSubmit =  async (values, actions) => {
+  const onSubmit = async (values, actions) => {
     console.log("VALUES", values);
     console.log("ACTIONS", actions);
     await new Promise((resolve) => setTimeout(resolve, 3000));
-    actions.resetForm()
+    actions.resetForm();
   };
 
-  const { values, handleChange, handleBlur, errors, touched, handleSubmit, isSubmitting } =
-    useFormik({
-      initialValues: init,
-      validationSchema: basicSchema,
-      onSubmit,
-    });
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    errors,
+    touched,
+    handleSubmit,
+    isSubmitting,
+  } = useFormik({
+    initialValues: init,
+    validationSchema: basicSchema,
+    onSubmit,
+  });
 
   return (
     <div>
@@ -85,7 +92,9 @@ const BasicForm = () => {
           <p className="error">{errors.confirmPassword}</p>
         )}
 
-        <button disabled = {isSubmitting} type="submit">submit</button>
+        <button disabled={isSubmitting} type="submit">
+          submit
+        </button>
       </form>
     </div>
   );
